@@ -6,6 +6,7 @@ export enum TokenType {
   CloseParen,
   BinaryOperator,
   Let,
+  EOF, // End of File
 }
 
 const KEYWORDS: Record<string, TokenType> = {
@@ -22,11 +23,11 @@ function token(value = "", type: TokenType): Token {
 }
 
 function isAlpha(src: string) {
-  return src.match(/^[A-Za-z]+$/i) !== null;
+  return src.toLowerCase() !== src.toUpperCase();
 }
 
 function isInt(src: string) {
-  return src.match(/^[0-9]+$/i) !== null;
+  return parseInt(src) >= 0 && parseInt(src) <= 9;
 }
 
 function isSkippable(str: string) {
@@ -42,17 +43,18 @@ export function tokenize(sourceCode: string): Token[] {
       tokens.push(token(src.shift(), TokenType.OpenParen));
     } else if (src[0] == ")") {
       tokens.push(token(src.shift(), TokenType.CloseParen));
-    } else if (
+    } //Handle binary operators
+    else if (
       src[0] == "+" ||
       src[0] == "-" ||
       src[0] == "*" ||
-      src[0] == "/"
+      src[0] == "/" ||
+      src[0] == "%"
     ) {
       tokens.push(token(src.shift(), TokenType.BinaryOperator));
     } else if (src[0] == "=") {
       tokens.push(token(src.shift(), TokenType.Equals));
     } else {
-      console.log("SOURCE: " + src[0]);
       if (isSkippable(src[0])) {
         src.shift();
       } else if (isInt(src[0])) {
@@ -80,10 +82,6 @@ export function tokenize(sourceCode: string): Token[] {
       }
     }
   }
+  tokens.push(token("EndOfFile", TokenType.EOF));
   return tokens;
-}
-
-const source = await Deno.readTextFile("./test.ts");
-for (const token of tokenize(source)){
-  console.log(token);
 }

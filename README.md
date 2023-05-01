@@ -10,6 +10,9 @@ Later in the process I'll try to translate the learned knowledge to adjust and e
 - [x] Interpreter
 - [x] Values
 - [X] Environments & Variable Storage 
-- [ ] Variable Declarations
+- [X] Variable Declarations
 - [ ] Assignment Expressions
-- [ ] Object & User Defined Structures 
+- [ ] Objects & User Defined Structures 
+- [ ] FunctionCalls & Object Member Expressions
+- [ ] Native Global Functions
+- [ ] User Defined Functions & Closures

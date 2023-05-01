@@ -8,12 +8,14 @@ repl();
 function repl() {
     const parser = new Parser();
     const env = new Environment();
-    env.declareVar("x", MK_NUMBER(100));
-    env.declareVar("true", MK_BOOL(true));
-    env.declareVar("false", MK_BOOL(false));
-    env.declareVar("null", MK_NULL());
-    console.log("\nRepl v.01");
 
+    // Create default global environment
+    env.declareVar("true", MK_BOOL(true), true);
+    env.declareVar("false", MK_BOOL(false), true);
+    env.declareVar("null", MK_NULL(), true );
+
+    // Init REPL
+    console.log("\nRepl v.01");
     // continue until user stops or exits
     while(true){
         const input = prompt("> ");
@@ -23,6 +25,7 @@ function repl() {
             Deno.exit(1);
         }
 
+        // produce AST from source-code
         const program = parser.produceAST(input);
 
         const result = evaluate(program, env);

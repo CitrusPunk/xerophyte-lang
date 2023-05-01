@@ -86,6 +86,7 @@ export default class Parser {
       kind: "VarDeclaration",
       value: this.parse_expr(),
       constant: isConstant,
+      identifier,
     } as VarDeclaration;
 
     this.expect(TokenType.Semicolon, "Variable declaration statement must end with semicolon.");

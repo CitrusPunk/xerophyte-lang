@@ -9,7 +9,7 @@ Later in the process I'll try to translate the learned knowledge to adjust and e
 - [x] Parser
 - [x] Interpreter
 - [x] Values
-- [ ] Environments & Variable Storage 
+- [X] Environments & Variable Storage 
 - [ ] Variable Declarations
 - [ ] Assignment Expressions
 - [ ] Object & User Defined Structures 

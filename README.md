@@ -11,7 +11,7 @@ Later in the process I'll try to translate the learned knowledge to adjust and e
 - [x] Values
 - [X] Environments & Variable Storage 
 - [X] Variable Declarations
-- [ ] Assignment Expressions
+- [X] Assignment Expressions
 - [ ] Objects & User Defined Structures 
 - [ ] FunctionCalls & Object Member Expressions
 - [ ] Native Global Functions

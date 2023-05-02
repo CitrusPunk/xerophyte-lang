@@ -6,6 +6,7 @@ import {
   NumericLiteral,
   Identifier,
   VarDeclaration,
+  AssignmentExpr,
 } from "./ast.ts";
 
 import { tokenize, Token, TokenType } from "./lexer.ts";
@@ -89,12 +90,27 @@ export default class Parser {
       identifier,
     } as VarDeclaration;
 
-    this.expect(TokenType.Semicolon, "Variable declaration statement must end with semicolon.");
+    this.expect(
+      TokenType.Semicolon,
+      "Variable declaration statement must end with semicolon."
+    );
     return declaration;
   }
 
   private parse_expr(): Expr {
-    return this.parse_additive_expr();
+    return this.parse_assignment_expr();
+  }
+
+  private parse_assignment_expr(): Expr {
+    const left = this.parse_additive_expr(); // switch this out with objectExpr
+
+    if (this.at().type == TokenType.Equals) {
+      this.eat(); // advance past equals
+      const value = this.parse_assignment_expr();
+      return { value, assigne: left, kind: "AssignmentExpr" } as AssignmentExpr;
+    }
+
+    return left;
   }
 
   // (10 + 5) - 5

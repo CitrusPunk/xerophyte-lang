@@ -6,10 +6,9 @@ Later in the process I'll try to translate the learned knowledge to adjust and e
 ## Requirements
 Xerophyte requires the following to run:
  - [Xerophyte Repository](https://github.com/CitrusPunk/xerophyte-lang)
- - [Deno](https://deno.com/runtime)
-You can download the repository via 
-```git clone https://github.com/CitrusPunk/xerophyte-lang```
-[Deno installation](https://deno.com/manual@v1.33.1/getting_started/installation)
+ - [Deno](https://deno.com/runtime)  
+You can download the repository via ```git clone https://github.com/CitrusPunk/xerophyte-lang```  
+[Deno installation](https://deno.com/manual@v1.33.1/getting_started/installation)  
 
 ## Checklist
 - [x] Lexer

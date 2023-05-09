@@ -22,7 +22,7 @@ When all requirements are set up, you can simply start the REPL with:
 - [X] Environments & Variable Storage 
 - [X] Variable Declarations
 - [X] Assignment Expressions
-- [ ] Objects & User Defined Structures 
+- [X] Objects & User Defined Structures 
 - [ ] FunctionCalls & Object Member Expressions
 - [ ] Native Global Functions
 - [ ] User Defined Functions & Closures

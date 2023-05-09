@@ -1,4 +1,11 @@
-import { RuntimeVal } from "./values.ts";
+import { MK_BOOL, MK_NULL, RuntimeVal } from "./values.ts";
+
+function setupGlobalScope(env: Environment) {
+  // Create default global environment
+  env.declareVar("true", MK_BOOL(true), true);
+  env.declareVar("false", MK_BOOL(false), true);
+  env.declareVar("null", MK_NULL(), true);
+}
 
 export default class Environment {
   private parent?: Environment;
@@ -6,19 +13,28 @@ export default class Environment {
   private constants: Set<string>;
 
   constructor(parentEnv?: Environment) {
+    const global = parentEnv ? true : false;
     this.parent = parentEnv;
     this.variables = new Map();
     this.constants = new Set();
+
+    if(global){
+      setupGlobalScope(this);
+    }
   }
 
-  public declareVar(varname: string, value: RuntimeVal, constant: boolean): RuntimeVal {
+  public declareVar(
+    varname: string,
+    value: RuntimeVal,
+    constant: boolean
+  ): RuntimeVal {
     if (this.variables.has(varname)) {
       throw `Cannot declare variable ${varname}. As it already is defined`;
     }
 
     this.variables.set(varname, value);
 
-    if(constant){
+    if (constant) {
       this.constants.add(varname);
     }
     return value;
@@ -28,7 +44,7 @@ export default class Environment {
     const env = this.resolve(varname);
 
     // Cannot assign to constant
-    if(env.constants.has(varname)){
+    if (env.constants.has(varname)) {
       throw `Cannot reassign to ${varname}. As it is already assigned and constant.`;
     }
 
